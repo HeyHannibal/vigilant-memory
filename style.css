@@ -15,7 +15,7 @@ html {
 .hue1 {
   position: absolute;
   height: 100%;
-  width: 200%;
+  width: 1200%;
   background: linear-gradient(
     90deg,
     hsl(210, 100%, 50%),
@@ -42,7 +42,7 @@ html {
     hsl(150, 100%, 50%),
     hsl(210, 100%, 50%)
   );
-  animation: moveOut 10s infinite linear;
+  animation: moveOut 140s infinite linear;
 }
 
 @keyframes moveOut {
@@ -55,7 +55,7 @@ html {
 }
 .hue2 {
   height: 100%;
-  width: 200%;
+  width: 1200%;
   background: linear-gradient(
     90deg,
     hsl(210, 100%, 50%),
@@ -82,7 +82,7 @@ html {
     hsl(150, 100%, 50%),
     hsl(210, 100%, 50%)
   );
-  animation: moveIn 10s infinite linear;
+  animation: moveIn 140s infinite linear;
 }
 @keyframes moveIn {
   from {
