@@ -29,6 +29,7 @@ function createGrad() {
 function random(items) {
   return items[Math.floor(Math.random() * items.length)];
 }
+
 function makeGrad() {
   let color = random(colors);
   let colour = random(colors);
@@ -39,15 +40,14 @@ function makeGrad() {
   let end = ")";
 
   let gradString = "";
-
-  for (let i = 0; i < 9; i++) {
+  let frqnc = random([9, 13]);
+  for (let i = 0; i < frqnc; i++) {
     if (i % 2 === 0) gradString = gradString.concat(color + ",");
     else gradString = gradString.concat(colour + ",");
     console.log(random([9, 43, 21]));
   }
   return start.concat(gradString.slice(0, gradString.length - 1)) + ")";
 }
-console.log();
 
 function save() {
   var markup = document.documentElement.innerHTML;
@@ -58,13 +58,14 @@ function save() {
   a.download = "your-download-name-here.html";
   a.hidden = true;
   document.body.appendChild(a);
-  a.innerHTML =
-    "something random - nobody will see this, it doesn't matter what you put here";
+  a.innerHTML = "000";
   a.click();
 }
+
 document.querySelector("#download").addEventListener("click", () => {
   save();
 });
+
 function randInt(min, max) {
   return Math.floor(Math.random() * (max - min) + min);
 }
@@ -130,7 +131,7 @@ var yPad = Math.floor(height * 0.1);
 
 var initialRect = new Rectangle(new Point(0, 0), new Point(width, height));
 initialRect.split(xPad, yPad, 0, 4);
-console.log(rectangles);
+
 rectangles.reverse().forEach((item) => {
   let x = item.min.x;
   let y = item.min.y;
@@ -150,5 +151,3 @@ rectangles.reverse().forEach((item) => {
   document.body.appendChild(div);
 });
 gradient.remove();
-// save();
-//
