@@ -17,7 +17,6 @@ let colors = [
 let gradient = document.querySelector(".grad");
 
 function createGrad() {
-  console.log(gradient);
   let newGrad = gradient.cloneNode(true);
   let grad = makeGrad();
   newGrad.childNodes[1].style.background = grad;
@@ -44,7 +43,6 @@ function makeGrad() {
   for (let i = 0; i < frqnc; i++) {
     if (i % 2 === 0) gradString = gradString.concat(color + ",");
     else gradString = gradString.concat(colour + ",");
-    console.log(random([9, 43, 21]));
   }
   return start.concat(gradString.slice(0, gradString.length - 1)) + ")";
 }
@@ -71,8 +69,8 @@ function randInt(min, max) {
 }
 
 let rectangles = [];
-let width = 1000;
-let height = 1000;
+let width = 10000;
+let height = 10000;
 class Point {
   constructor(x, y) {
     this.x = x;
@@ -126,13 +124,22 @@ class Rectangle {
   }
 }
 
-var xPad = Math.floor(width * 0.1);
-var yPad = Math.floor(height * 0.1);
+var xPad = Math.floor(width * 0.1 - 10);
+var yPad = Math.floor(height * 0.1 - 10);
 
 var initialRect = new Rectangle(new Point(0, 0), new Point(width, height));
-initialRect.split(xPad, yPad, 0, 4);
+initialRect.split(xPad, yPad, 0, 8);
 
-rectangles.reverse().forEach((item) => {
+rectangles.reverse().forEach((item, index) => {
+  if (index === 0) {
+    let div = createGrad();
+    div.style.position = "absolute";
+    div.style.left = "0%";
+    div.style.bottom = "0%";
+    div.style.width = "100%";
+    div.style.height = "100%";
+    document.body.appendChild(div);
+  }
   let x = item.min.x;
   let y = item.min.y;
   let width = item.max.x - item.min.x;
@@ -151,3 +158,4 @@ rectangles.reverse().forEach((item) => {
   document.body.appendChild(div);
 });
 gradient.remove();
+console.log(rectangles);

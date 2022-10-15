@@ -12,7 +12,7 @@ html {
   width: 40vw;
   height: 30vh;
 }
-.hue1 {
+/* .hue1 {
   position: absolute;
   height: 100%;
   width: 1200%;
@@ -91,7 +91,7 @@ html {
   to {
     transform: translate(0);
   }
-}
+} */
 /* seam 
  hsl(210, 100%, 50%),
     hsl(150, 100%, 50%),
@@ -126,7 +126,7 @@ html {
   width: 11rem;
   height: 3rem;
   border: 3px solid black;
-  font-family: "Righteous", cursive;
+  /* font-family: "Righteous", cursive; */
   font-size: 2rem;
-  /* font-family: "Staatliches", cursive; */
+  font-family: "Staatliches", cursive;
 }
