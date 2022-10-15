@@ -116,17 +116,19 @@ html {
     hsl(210, 100%, 50%),
     hsl(150, 100%, 50%),
     hsl(210, 100%, 50%) */
-#download {
+#ui {
   position: absolute;
   left: 50%;
   top: 90%;
   transform: translate(-50%, -50%);
   z-index: 100;
+}
+button {
   background-color: rgb(255, 255, 255);
   width: 11rem;
   height: 3rem;
   border: 3px solid black;
   /* font-family: "Righteous", cursive; */
   font-size: 2rem;
-  font-family: "Staatliches", cursive;
+  font-family: "Helvetica", cursive;
 }

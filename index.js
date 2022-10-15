@@ -18,9 +18,12 @@ let gradient = document.querySelector(".grad");
 
 function createGrad() {
   let newGrad = gradient.cloneNode(true);
+  newGrad.setAttribute("id", "");
+
   let grad = makeGrad();
-  newGrad.childNodes[1].style.background = grad;
-  newGrad.childNodes[3].style.background = grad;
+  if (grad.degree === "180deg") newGrad.classList.add("down");
+  newGrad.childNodes[1].style.background = grad.grad;
+  newGrad.childNodes[3].style.background = grad.grad;
 
   return newGrad;
 }
@@ -29,22 +32,25 @@ function random(items) {
   return items[Math.floor(Math.random() * items.length)];
 }
 
-function makeGrad() {
+function makeGrad(background) {
   let color = random(colors);
   let colour = random(colors);
   while (color === colour) {
     colour = random(colors);
   }
-  let start = "linear-gradient( 90deg,";
+  let degrees = ["90deg", "180deg"];
+  let degree = random(degrees);
+  let start = `linear-gradient( ${degree},`;
   let end = ")";
 
   let gradString = "";
-  let frqnc = random([9, 13]);
+  let frqnc = random([3, 9, 9, 13, 13, 13]);
+  if (background) frqnc = 100;
   for (let i = 0; i < frqnc; i++) {
     if (i % 2 === 0) gradString = gradString.concat(color + ",");
     else gradString = gradString.concat(colour + ",");
   }
-  return start.concat(gradString.slice(0, gradString.length - 1)) + ")";
+  return { grad: start.concat(gradString.slice(0, gradString.length - 1)) + ")", degree };
 }
 
 function save() {
@@ -127,35 +133,53 @@ class Rectangle {
 var xPad = Math.floor(width * 0.1 - 10);
 var yPad = Math.floor(height * 0.1 - 10);
 
-var initialRect = new Rectangle(new Point(0, 0), new Point(width, height));
-initialRect.split(xPad, yPad, 0, 8);
+function newRect() {
+  rectangles = [];
+  var initialRect = new Rectangle(new Point(0, 0), new Point(width, height));
+  initialRect.split(xPad, yPad, 0, 8);
+}
 
-rectangles.reverse().forEach((item, index) => {
-  if (index === 0) {
+function createArtwork() {
+  newRect();
+  rectangles.reverse().forEach((item, index) => {
+    if (index === 0) {
+      let div = createGrad(true);
+      div.style.position = "absolute";
+      div.style.left = "0%";
+      div.style.bottom = "0%";
+      div.style.width = "100%";
+      div.style.height = "100%";
+      document.body.appendChild(div);
+    }
+    let x = item.min.x;
+    let y = item.min.y;
+    let width = item.max.x - item.min.x;
+    let height = item.max.y - item.min.y;
+
     let div = createGrad();
     div.style.position = "absolute";
-    div.style.left = "0%";
-    div.style.bottom = "0%";
-    div.style.width = "100%";
-    div.style.height = "100%";
+    let precent = (value) =>
+      value.toString().slice(0, 2) + "." + value.toString().slice(2, 4) + "%";
+
+    div.style.left = precent(x);
+    div.style.bottom = precent(y);
+    div.style.width = precent(width);
+    div.style.height = precent(height);
+    //   div.style.border = "1px solid white";
     document.body.appendChild(div);
-  }
-  let x = item.min.x;
-  let y = item.min.y;
-  let width = item.max.x - item.min.x;
-  let height = item.max.y - item.min.y;
+  });
+}
+createArtwork();
+// gradient.remove();
 
-  let div = createGrad();
-  div.style.position = "absolute";
-  let precent = (value) =>
-    value.toString().slice(0, 2) + "." + value.toString().slice(2, 4) + "%";
-
-  div.style.left = precent(x);
-  div.style.bottom = precent(y);
-  div.style.width = precent(width);
-  div.style.height = precent(height);
-  //   div.style.border = "1px solid white";
-  document.body.appendChild(div);
+function createNew() {
+  let gradients = document.querySelectorAll(".grad");
+  console.log(gradients);
+  gradients.forEach((node) => {
+    if (node.id !== "seed") node.remove();
+  });
+  createArtwork();
+}
+document.querySelector("#create").addEventListener("click", () => {
+  createNew();
 });
-gradient.remove();
-console.log(rectangles);

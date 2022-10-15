@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Document</title>
+    <title>ENRR</title>
     <link href="style.css" rel="stylesheet" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -65,7 +65,7 @@
           transform: translate(0);
         }
         to {
-          transform: translate(99.1%);
+          transform: translate(100%);
         }
       }
       .hue2 {
@@ -101,21 +101,46 @@
       }
       @keyframes moveIn {
         from {
-          transform: translate(-99.9%);
+          transform: translate(-99.3%);
         }
         to {
           transform: translate(0);
         }
       }
+
+      .grad.down .hue1 {
+        animation: moveDownOut 18s infinite linear;
+      }
+      .grad.down .hue2 {
+        animation: moveDownIn 18s infinite linear;
+      }
+      @keyframes moveDownOut {
+        from {
+          transform: translateY(0);
+        }
+        to {
+          transform: translateY(100%);
+        }
+      }
+      @keyframes moveDownIn {
+        from {
+          transform: translateY(-99.3%);
+        }
+        to {
+          transform: translateY(0);
+        }
+      }
     </style>
   </head>
   <body>
-    <div class="grad">
+    <div class="grad" id="seed">
       <div class="hue1"></div>
       <div class="hue2"></div>
     </div>
-    <button id="download">Download</button>
-    <button id="create">Create</button>
+    <div id="ui">
+      <button id="download">Download</button>
+      <button id="create">Create</button>
+    </div>
     <script src="index.js"></script>
   </body>
 </html>
