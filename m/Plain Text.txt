@@ -1,0 +1,69 @@
+      const colorss = [
+        { color: "#FF0000", pos: 0 },
+        { color: "#FFFF00", pos: 1 / 5 },
+        { color: "#FFFF00", pos: 2 / 5 },
+        { color: "#FFFF00", pos: 3 / 5 },
+        { color: "#FFFF00", pos: 4 / 5 },
+        { color: "#FF0000", pos: 1 },
+      ];
+
+      const angleStep = 0.0;
+      const linearStep = 0.004;
+
+      function init(posX, posY, w, h) {
+        const mw = canvas.width;
+        const mh = canvas.height;
+
+        let angle = 90;
+
+        function drawScreen() {
+          angle = (angle + angleStep) % 360;
+
+          const [x1, y1, x2, y2] = angleToPoints(angle, mw, mh);
+          const gradient = ctx.createLinearGradient(x1, y1, x2, y2);
+          for (const colorStop of colorss) {
+            gradient.addColorStop(colorStop.pos, colorStop.color);
+            colorStop.pos += linearStep;
+            // ### corrected error here
+            if (colorStop.pos > 1) colorStop.pos -= 1;
+          }
+
+          // ### compute and set the gradient end stops
+          const sortedStops = colorss.sort((a, b) => a.pos - b.pos);
+          const firstStop = sortedStops[0];
+          const lastStop = sortedStops.slice(-1)[0];
+          const endColor = lerpColor(firstStop.color, lastStop.color, firstStop.pos * 5);
+          gradient.addColorStop(0, endColor);
+          gradient.addColorStop(1, endColor);
+
+          ctx.fillStyle = gradient;
+          ctx.fillRect(posX, posY, w, h);
+        }
+
+        function loop() {
+          drawScreen();
+          requestAnimationFrame(loop);
+        }
+
+        loop();
+      }
+
+      function angleToPoints(angle, width, height) {
+        const rad = ((180 - angle) / 180) * Math.PI;
+        // This computes the length such that the start/stop points will be at the corners
+        const length = Math.abs(width * Math.sin(rad)) + Math.abs(height * Math.cos(rad));
+        // Compute the actual x,y points based on the angle, length of the gradient line and the center of the div
+        const halfx = (Math.sin(rad) * length) / 2.0;
+        const halfy = (Math.cos(rad) * length) / 2.0;
+        const cx = width / 2.0;
+        const cy = height / 2.0;
+        const x1 = cx - halfx;
+        const y1 = cy - halfy;
+        const x2 = cx + halfx;
+        const y2 = cy + halfy;
+        return [x1, y1, x2, y2];
+      }
+
+      init(100, 100, 100, 100);
+      init(000, 100, 100, 100);
+      init(200, 100, 100, 100);
