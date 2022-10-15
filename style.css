@@ -1,0 +1,132 @@
+body,
+html {
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+  background-color: rgb(22, 21, 21);
+  margin: 0;
+}
+.grad {
+  position: relative;
+  overflow: hidden;
+  width: 40vw;
+  height: 30vh;
+}
+.hue1 {
+  position: absolute;
+  height: 100%;
+  width: 200%;
+  background: linear-gradient(
+    90deg,
+    hsl(210, 100%, 50%),
+    hsl(150, 100%, 50%),
+    hsl(210, 100%, 50%),
+    hsl(150, 100%, 50%),
+    hsl(210, 100%, 50%),
+    hsl(150, 100%, 50%),
+    hsl(210, 100%, 50%),
+    hsl(150, 100%, 50%),
+    hsl(210, 100%, 50%),
+    hsl(150, 100%, 50%),
+    hsl(210, 100%, 50%),
+    hsl(150, 100%, 50%),
+    hsl(210, 100%, 50%),
+    hsl(150, 100%, 50%),
+    hsl(210, 100%, 50%),
+    hsl(150, 100%, 50%),
+    hsl(210, 100%, 50%),
+    hsl(150, 100%, 50%),
+    hsl(210, 100%, 50%),
+    hsl(150, 100%, 50%),
+    hsl(210, 100%, 50%),
+    hsl(150, 100%, 50%),
+    hsl(210, 100%, 50%)
+  );
+  animation: moveOut 10s infinite linear;
+}
+
+@keyframes moveOut {
+  from {
+    transform: translate(0);
+  }
+  to {
+    transform: translate(99.1%);
+  }
+}
+.hue2 {
+  height: 100%;
+  width: 200%;
+  background: linear-gradient(
+    90deg,
+    hsl(210, 100%, 50%),
+    hsl(150, 100%, 50%),
+    hsl(210, 100%, 50%),
+    hsl(150, 100%, 50%),
+    hsl(210, 100%, 50%),
+    hsl(150, 100%, 50%),
+    hsl(210, 100%, 50%),
+    hsl(150, 100%, 50%),
+    hsl(210, 100%, 50%),
+    hsl(150, 100%, 50%),
+    hsl(210, 100%, 50%),
+    hsl(150, 100%, 50%),
+    hsl(210, 100%, 50%),
+    hsl(150, 100%, 50%),
+    hsl(210, 100%, 50%),
+    hsl(150, 100%, 50%),
+    hsl(210, 100%, 50%),
+    hsl(150, 100%, 50%),
+    hsl(210, 100%, 50%),
+    hsl(150, 100%, 50%),
+    hsl(210, 100%, 50%),
+    hsl(150, 100%, 50%),
+    hsl(210, 100%, 50%)
+  );
+  animation: moveIn 10s infinite linear;
+}
+@keyframes moveIn {
+  from {
+    transform: translate(-99.9%);
+  }
+  to {
+    transform: translate(0);
+  }
+}
+/* seam 
+ hsl(210, 100%, 50%),
+    hsl(150, 100%, 50%),
+    hsl(210, 100%, 50%),
+    hsl(150, 100%, 50%),
+    hsl(210, 100%, 50%),
+    hsl(150, 100%, 50%),
+    hsl(210, 100%, 50%),
+    hsl(150, 100%, 50%),
+    hsl(210, 100%, 50%),
+    hsl(150, 100%, 50%),
+    hsl(210, 100%, 50%),
+    hsl(150, 100%, 50%),
+    hsl(210, 100%, 50%),
+    hsl(150, 100%, 50%),
+    hsl(210, 100%, 50%),
+    hsl(150, 100%, 50%),
+    hsl(210, 100%, 50%),
+    hsl(150, 100%, 50%),
+    hsl(210, 100%, 50%),
+    hsl(150, 100%, 50%),
+    hsl(210, 100%, 50%),
+    hsl(150, 100%, 50%),
+    hsl(210, 100%, 50%) */
+#download {
+  position: absolute;
+  left: 50%;
+  top: 90%;
+  transform: translate(-50%, -50%);
+  z-index: 100;
+  background-color: rgb(255, 255, 255);
+  width: 11rem;
+  height: 3rem;
+  border: 3px solid black;
+  font-family: "Righteous", cursive;
+  font-size: 2rem;
+  /* font-family: "Staatliches", cursive; */
+}

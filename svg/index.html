@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="index.js" defer></script>
+    <title>ENRR Algorithm</title>
+    <style>
+      body {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+      }
+      .shadow {
+        -webkit-filter: drop-shadow(15px 3px 2px rgba(0, 0, 0, 0.7));
+        filter: drop-shadow(10px 3px 15px rgba(0, 0, 0, 0.7));
+      }
+      main {
+        width: 60vw;
+        height: 60vw;
+      }
+    </style>
+  </head>
+  <body style="background-color: rgb(11, 20, 22)">
+    <main>
+      <svg
+        viewBox="0 0 1000 1000"
+        class="shadow"
+        height="60vw"
+        width="60vw"
+        style="background-color: rgb(3, 33, 41)"
+        xmlns="http://www.w3.org/2000/svg"
+        id="canvas"
+      >
+        <!-- <defs>
+        <linearGradient id="gradient" x1="100%" y1="0%" x2="0%" y2="0%">
+          <stop offset="0%" style="stop-color: #0f8b8d" />
+          <stop offset="2.9411764705882355%" style="stop-color: #87fffe" />
+          <stop offset="5.882352941176471%" style="stop-color: #0f8b8d" />
+          <stop offset="8.823529411764707%" style="stop-color: #87fffe" />
+          <stop offset="11.764705882352942%" style="stop-color: #0f8b8d" />
+          <stop offset="14.705882352941178%" style="stop-color: #87fffe" />
+          <stop offset="17.647058823529413%" style="stop-color: #0f8b8d" />
+          <stop offset="20.58823529411765%" style="stop-color: #87fffe" />
+          <stop offset="23.529411764705884%" style="stop-color: #0f8b8d" />
+          <stop offset="26.47058823529412%" style="stop-color: #87fffe" />
+          <stop offset="29.411764705882355%" style="stop-color: #0f8b8d" />
+          <stop offset="32.352941176470594%" style="stop-color: #87fffe" />
+          <stop offset="35.294117647058826%" style="stop-color: #0f8b8d" />
+          <stop offset="38.23529411764706%" style="stop-color: #87fffe" />
+          <stop offset="41.17647058823529%" style="stop-color: #0f8b8d" />
+          <stop offset="44.11764705882352%" style="stop-color: #87fffe" />
+          <stop offset="47.058823529411754%" style="stop-color: #0f8b8d" />
+          <stop offset="49.999999999999986%" style="stop-color: #87fffe" />
+          <stop offset="52.94117647058822%" style="stop-color: #0f8b8d" />
+          <stop offset="55.88235294117645%" style="stop-color: #87fffe" />
+          <stop offset="58.82352941176468%" style="stop-color: #0f8b8d" />
+          <stop offset="61.764705882352914%" style="stop-color: #87fffe" />
+          <stop offset="64.70588235294115%" style="stop-color: #0f8b8d" />
+          <stop offset="67.64705882352938%" style="stop-color: #87fffe" />
+          <stop offset="70.58823529411761%" style="stop-color: #0f8b8d" />
+          <stop offset="73.52941176470584%" style="stop-color: #87fffe" />
+          <stop offset="76.47058823529407%" style="stop-color: #0f8b8d" />
+          <stop offset="79.4117647058823%" style="stop-color: #87fffe" />
+          <stop offset="82.35294117647054%" style="stop-color: #0f8b8d" />
+          <stop offset="85.29411764705877%" style="stop-color: #87fffe" />
+          <stop offset="88.235294117647%" style="stop-color: #0f8b8d" />
+          <stop offset="91.17647058823523%" style="stop-color: #87fffe" />
+          <stop offset="94.11764705882347%" style="stop-color: #0f8b8d" />
+          <stop offset="97.0588235294117%" style="stop-color: #87fffe" />
+          <stop offset="99.99999999999993%" style="stop-color: #0f8b8d" />
+        </linearGradient>
+      </defs>
+
+      <rect fill="url(#pattern)" width="800" height="800" /> -->
+      </svg>
+      <svg>
+        <pattern id="pattern" x="0" y="0" width="100%" height="100%">
+          <rect x="-200%" y="0%" width="200%" height="100%" fill="url(#gradient)">
+            <animate
+              attributeType="XML"
+              attributeName="x"
+              from="-200%"
+              to="0%"
+              dur="100s"
+              repeatCount="indefinite"
+            />
+          </rect>
+          <rect x="-1%" y="0" width="200%" height="100%" fill="url(#gradient)">
+            <animate
+              attributeType="XML"
+              attributeName="x"
+              from="-1%"
+              to="200%"
+              dur="100s"
+              repeatCount="indefinite"
+            />
+          </rect>
+        </pattern>
+      </svg>
+    </main>
+    <button id="refresh">refresh</button>
+    <button id="download">download</button>
+  </body>
+</html>
+<!-- // const pattern = document.createElementNS("http://www.w3.org/2000/svg", "pattern"); //
+pattern.setAttribute("x", "-100px"); // pattern.setAttribute("width", "100%"); //
+pattern.setAttribute("height", "100%"); // const rect1 =
+document.createElementNS("http://www.w3.org/2000/svg", "rect"); // const rect2 =
+document.createElementNS("http://www.w3.org/2000/svg", "rect"); // rect1.setAttribute("x",
+"-200%"); // rect1.setAttribute("width", "200%"); // rect1.setAttribute("height", "100%");
+// rect1.setAttribute('fill','url(#grad)') // const animate1 = mkns('animate') //
+animate1.setAttribute('attributeType','XML') // animate1.setAttribute('attributeName','x')
+// animate1.setAttribute('from','-200%') // animate1.setAttribute('to','0%') //
+animate1.setAttribute('repeatCount','indefinite') // rect1.appendChild(rect1) -->

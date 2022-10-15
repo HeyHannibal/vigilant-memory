@@ -1,22 +1,77 @@
-const cnvs = document.querySelector("#canvas");
+let colors = [
+  "#f2545b",
+  "#a93f55",
+  " #19323c",
+  "#f3f7f0",
+  " #8c5e58",
+  "#2e86ab",
+  " #f6f5ae",
+  "#f5f749",
+  " #f24236",
+  "#d00000",
+  "#ffba08",
+  " #3f88c5",
+  "#032b43",
+  " #136f63",
+];
+let gradient = document.querySelector(".grad");
 
-// let width = Number(cnvs.getAttribute("width").split("p")[0]);
-// let height = Number(cnvs.getAttribute("height").split("p")[0]);
-let width = 1500;
-let height = 1500;
-console.log(width, height);
+function createGrad() {
+  console.log(gradient);
+  let newGrad = gradient.cloneNode(true);
+  let grad = makeGrad();
+  newGrad.childNodes[1].style.background = grad;
+  newGrad.childNodes[3].style.background = grad;
+
+  return newGrad;
+}
+
+function random(items) {
+  return items[Math.floor(Math.random() * items.length)];
+}
+function makeGrad() {
+  let color = random(colors);
+  let colour = random(colors);
+  while (color === colour) {
+    colour = random(colors);
+  }
+  let start = "linear-gradient( 90deg,";
+  let end = ")";
+
+  let gradString = "";
+
+  for (let i = 0; i < 9; i++) {
+    if (i % 2 === 0) gradString = gradString.concat(color + ",");
+    else gradString = gradString.concat(colour + ",");
+    console.log(random([9, 43, 21]));
+  }
+  return start.concat(gradString.slice(0, gradString.length - 1)) + ")";
+}
+console.log();
+
+function save() {
+  var markup = document.documentElement.innerHTML;
+  var htmlContent = [markup];
+  var bl = new Blob(htmlContent, { type: "text/html" });
+  var a = document.createElement("a");
+  a.href = URL.createObjectURL(bl);
+  a.download = "your-download-name-here.html";
+  a.hidden = true;
+  document.body.appendChild(a);
+  a.innerHTML =
+    "something random - nobody will see this, it doesn't matter what you put here";
+  a.click();
+}
+document.querySelector("#download").addEventListener("click", () => {
+  save();
+});
 function randInt(min, max) {
   return Math.floor(Math.random() * (max - min) + min);
 }
 
-let randEvenInt = (min, max) => {
-  let n = randInt(min, max);
-  if (n % 2 === 0) return n;
-  else if (n + 1 > max) return n - 1;
-  else return n + 1;
-};
 let rectangles = [];
-
+let width = 1000;
+let height = 1000;
 class Point {
   constructor(x, y) {
     this.x = x;
@@ -25,7 +80,6 @@ class Point {
 }
 
 class Rectangle {
-  rectangles = [];
   constructor(min, max) {
     this.min = min;
     this.max = max;
@@ -76,202 +130,25 @@ var yPad = Math.floor(height * 0.1);
 
 var initialRect = new Rectangle(new Point(0, 0), new Point(width, height));
 initialRect.split(xPad, yPad, 0, 4);
+console.log(rectangles);
+rectangles.reverse().forEach((item) => {
+  let x = item.min.x;
+  let y = item.min.y;
+  let width = item.max.x - item.min.x;
+  let height = item.max.y - item.min.y;
 
-function redraw() {
-  initialRect = new Rectangle(new Point(0, 0), new Point(width, height));
-  initialRect.split(xPad, yPad, 0, 1);
-}
+  let div = createGrad();
+  div.style.position = "absolute";
+  let precent = (value) =>
+    value.toString().slice(0, 2) + "." + value.toString().slice(2, 4) + "%";
 
-//const colors = ["#dad2d8", "#143642", "#0f8b8d", "#ec9a29", "#a8201a"];
-var colors = [
-  // "#2f0d10",
-  // "#520c37",
-  // "#8b2a2f",
-  // "#a85257",
-  // "#b8199c",
-  // "#cc44dc",
-  // "#d285fb",
-  // "#f4e8f1",
-  // "#fa060b",
-  // "#f9060c",
-  // "#ea1314",
-  // "#f2798e",
-  // "#fc28d2",
-
-  // "#f408fc",
-  // "#ec04fc",
-
-  // "#a011f5",
-  // "#9f18fa",
-  // "#8e29ea",
-  // "#6004f8",
-  // "#6041fa",
-  // "#6c2e94",
-  // "#040405",
-  // "#080610",
-  // "#140c42",
-  // "#261b75",
-  // "#0e0896",
-  // "#0404b8",
-  // "#0505fb",
-  // "#0504fb",
-  // "#0c05fa",
-  // "#0658f3",
-  // "#1364f5",
-  // "#0971e1",
-  // "#0598f8",
-  // "#09c7e8",
-  // "#0af4f8",
-  // "#06f8fa",
-  // "#05fbf9",
-  // "#20d8a7",
-  // "#1edb9b",
-  // "#57d0ed",
-  // "#5acbc1",
-  // "#6cbfbc",
-  // "#abd8ce",
-  // "#5cdf5a",
-  // "#98e54a",
-  // "#9bf164",
-  // "#a8ea73",
-  // "#b2fc4c",
-
-  // "#f9f30e",
-  // "#fca05f",
-  // "#ffffff",
-  // "#05f409",
-  // "#05f311",
-  // "#0ba124",
-  // "#08711e",
-  // "#04580a",
-  // "#042c0a",
-  // "#000000",
-  "#a2c0d1",
-  "#DFF6FF",
-];
-const gradient = document.querySelector("#gradient");
-const pattern = document.querySelector("#pattern");
-
-function createGrad(frqnc, id, parent) {
-  const grad = document.createElementNS("http://www.w3.org/2000/svg", "linearGradient");
-  grad.setAttribute("x1", "100%");
-  grad.setAttribute("y1", "0%");
-  grad.setAttribute("x2", "0%");
-  grad.setAttribute("y2", "0%");
-  grad.setAttribute("id", id);
-
-  const color1 = colors[randInt(0, colors.length)];
-  const color2 = colors[randInt(0, colors.length)];
-
-  let offset = 0;
-  let nStops = 100 / frqnc;
-  for (let i = 0; i < frqnc + 1; i++) {
-    if (i % 2 === 0) {
-      let stop1 = document.createElementNS("http://www.w3.org/2000/svg", "stop");
-      stop1.setAttribute("offset", `${offset}%`);
-      stop1.setAttribute("style", `stop-color: ${color1}`);
-      grad.appendChild(stop1);
-    } else if (i % 2 > 0) {
-      let stop2 = document.createElementNS("http://www.w3.org/2000/svg", "stop");
-      stop2.setAttribute("offset", `${offset}%`);
-      stop2.setAttribute("style", `stop-color:  ${color2}`);
-      grad.appendChild(stop2);
-    }
-
-    offset += nStops;
-  }
-  let def = document.createElementNS("http://www.w3.org/2000/svg", "defs");
-  def.appendChild(grad);
-  parent.appendChild(def);
-}
-
-//const mkns = (tag) => document.createElementNS("http://www.w3.org/2000/svg", tag);
-
-function createPattern(thisid, parent) {
-  const id = thisid;
-  let frqncs = [10, 20, 60, 100];
-  createGrad(frqncs[randInt(0, frqncs.length - 1)], id, parent);
-  const patternSchema = document.querySelector("pattern");
-  const pattern = patternSchema.cloneNode("deep");
-  pattern.id = id + "patt";
-  pattern.childNodes[1].setAttribute("fill", `url(#${id})`);
-
-  pattern.childNodes[3].setAttribute("fill", `url(#${id})`);
-  return pattern;
-}
-
-function renderRect(parent, x, y, width, height) {
-  const id = "patt" + height + y;
-  const svg = document.createElementNS("http://www.w3.org/2000/svg", "svg");
-  const rect = document.createElementNS("http://www.w3.org/2000/svg", "rect");
-  const pattern = createPattern(id, svg);
-
-  // rect.setAttribute("fill", colors[3]);
-  rect.setAttribute("fill", `url(#${id + "patt"})`);
-
-  rect.setAttribute("width", width);
-  rect.setAttribute("height", height);
-  rect.setAttribute("x", 0);
-  rect.setAttribute("y", 0);
-
-  svg.setAttribute("x", x);
-  svg.setAttribute("y", y);
-  svg.setAttribute("width", width);
-  svg.setAttribute("height", height);
-  svg.appendChild(pattern);
-  svg.appendChild(rect);
-
-  parent.appendChild(svg);
-}
-
-rectangles.reverse().forEach((rect, index) => {
-  renderRect(
-    cnvs,
-    rect.min.x,
-    rect.min.y,
-    rect.max.x - rect.min.x,
-    rect.max.y - rect.min.y
-  );
+  div.style.left = precent(x);
+  div.style.bottom = precent(y);
+  div.style.width = precent(width);
+  div.style.height = precent(height);
+  //   div.style.border = "1px solid white";
+  document.body.appendChild(div);
 });
-
-const refresh = document.querySelector("#refresh");
-// refresh.addEventListener("click", () => {               VISUAL
-//   cnvs.childNodes.forEach((child) => child.remove());
-// });
-
-refresh.addEventListener("click", () => {
-  rectangles = [];
-  console.log(rectangles.length);
-  while (cnvs.firstChild) {
-    cnvs.removeChild(cnvs.lastChild);
-  }
-  initialRect = new Rectangle(new Point(0, 0), new Point(width, height));
-  initialRect.split(xPad, yPad, 0, randInt(2, 10));
-  console.log(rectangles.length);
-  rectangles.reverse().forEach((rect, index) => {
-    renderRect(
-      cnvs,
-      rect.min.x,
-      rect.min.y,
-      rect.max.x - rect.min.x,
-      rect.max.y - rect.min.y
-    );
-  });
-});
-
-function saveSvg(svgEl, name) {
-  svgEl.setAttribute("xmlns", "http://www.w3.org/2000/svg");
-  var svgData = svgEl.outerHTML;
-  var preface = '<?xml version="1.0" standalone="no"?>\r\n';
-  var svgBlob = new Blob([preface, svgData], { type: "image/svg+xml;charset=utf-8" });
-  var svgUrl = URL.createObjectURL(svgBlob);
-  var downloadLink = document.createElement("a");
-  downloadLink.href = svgUrl;
-  downloadLink.download = name;
-  document.body.appendChild(downloadLink);
-  downloadLink.click();
-  document.body.removeChild(downloadLink);
-}
-document.querySelector("#download").addEventListener("click", () => {
-  saveSvg(cnvs, "endless-nameless.svg");
-});
+gradient.remove();
+// save();
+//
